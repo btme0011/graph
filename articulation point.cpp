@@ -7,13 +7,13 @@ struct art_pnt{
     T timer=0;
     T n;
     vector<T> ans;
-    art_pnt(T node,vector<vector<T>> e){// pass no of nodes and edge 
+    art_pnt(T node,vector<vector<T>> e,T start){// no of nodes , edge , startting node
         edge=e;
         n=node;
         vis=vector<bool>(n);
         tin=vector<T>(n);
         tout=vector<T>(n);
-        dfs(0,-1);
+        dfs(start,-1);
     }
     
     
