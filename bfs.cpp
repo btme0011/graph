@@ -1,23 +1,22 @@
 template<typename T>
 struct bfs{
 	queue<T> q;
-	
-	q.push(INF);
 	vector<bool> vis;
 	
 	
 	T n;
 	vector<vector<T>> edge;
-	bfs(T s,vector<vector<T>> e){
+	bfs(T sz,vector<vector<T>> e,T st){// no of nodex,edge,starting node
 		edge=e;
-		n=s;
-		vis=vector<bool>(s);
-		start();
+		n=sz;
+		vis=vector<bool>(sz);
+		start(st);
 	}
 	
-	void start(){
-		q.push(0);// initial element in queue
-		vis.insert(0);
+	void start(T st){
+		q.push(st);// initial element in queue
+		vis[st]=1;
+		q.push(INF);
 		while(!q.empty()){
 			T curr=q.front();
 			q.pop();
