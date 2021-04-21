@@ -1,30 +1,45 @@
-	vector<vector<pair<ll,ll>> edge(n);
-	for(int i=0;i<m;i++) {
-		ll a,b,c;
-		cin>>a>>b>>c;
-		a--;
-		b--;
-		edge[a].push_back({c,b});
-		edge[b].push_back({c,a});
+template<typename T>
+struct dja{
+	vector<vector<pair<T,T>> edge;
+	vector<bool> vis;
+	T ans;
+	dja(T n,vector<vector<pair<T,T>>> e,T a,T b){// no of nodes,edge(weight and destination),start node,destination node
+		edge=e;
+		vis=vector<bool>(n+1);
+		starti(e,a);
+		
 	}
+// 	for(int i=0;i<m;i++) {
+// 		ll a,b,c;
+// 		cin>>a>>b>>c;
+// 		a--;
+// 		b--;
+// 		edge[a].push_back({c,b});
+// 		edge[b].push_back({c,a});
+// 	}
 	
-	
-	priority_queue<tuple<ll,ll,ll>,vector<tuple<ll,ll,ll>>,greater<tuple<ll,ll,ll>>> pq;
-	pq.push({0,0});
-	set<ll> visited;
-	//visited.insert(0);
-	ll cnt=0;
-	vector<ll> ans;
-	while(!pq.empty()){
-		pair<ll,ll> curr=pq.top();
-		if(visited.count(curr.second)!=0) {pq.pop();continue;}
-		visited.insert(curr.second);
-		pq.pop();		
+	void start(vector<vector<pair<T,T>>> edge,T a,T b){
 		
-		
-		for(auto x:edge[curr.second]){// things which are connected by that node
-			if(visited.count(x.second)==0)	{
-				pq.push({x.first+curr.first,x.second});
+		set<pair<T,T>> se;
+		pq.push({0,a});
+		vis[a]=1;
+		while(!pq.empty()){
+			pair<ll,ll> curr=*se.begin();
+			if(visited[curr.second]!=0) {se.erase(se.begin());continue;}
+			vis[curr.second]=1;
+			se.erase(se.begin());		
+
+			if(curr.second==b){
+				ans=curr.first;
+				break;
+			}
+			
+			for(auto x:edge[curr.second]){// things which are connected by that node
+				if(visited[x.second]==0)	{
+					pq.push({x.first+curr.first,x.second});
+				}
 			}
 		}
+		
 	}
+};
