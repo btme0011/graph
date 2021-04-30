@@ -1,38 +1,11 @@
 template<typename T>
 struct lca{
-	T dp[N][(T)log2(N)+1];//in place of N write no of nodex in tree
-	T depth[N];// depth of each node
+	T N;
+	vector<vector<T>> dp;
+	vector<T> depth;
 	T ans; // get the answer
 	
-	lca(T p,T q,T sz,vector<vector<T>> e,T start){// two nodes whose lca u want to know,no of nodes, edge, starting node
-		N=sz;
-		dp=vector<vector<T>>(sz,vector<T>(log2(sz)+1));//N is no of nodes
-		depth=vector<T>(sz);// depth of each node
-		ans=solve(p,q,start,e);
-	}
-	
-	void dfs(int node,vector<vector<int>> edge,int par,int dep){ // to fill the first col of DP and depth of each node
-		dp[node][0]=par;
-	  depth[node]=dep;
-
-		for(int x:edge[node]){
-			if(x!=par)
-				dfs1(x,edge,node,dep+1);
-		}
-	}
-
-	T solve(T p,T q,T start,vector<vector<T>> edge){
-
-		dfs1(start,edge,-1,0);
-
-		for(int i=0;i<log2(N);i++){// to fill remainin cells of dp
-			for(int j=1;j<N;j++){
-				if(dp[i][j-1]!=-1){
-					dp[i][j]=dp[dp[i][j-1]][j-1];
-				}
-			}
-		}
-
+	T find(T p,T q){// get the answer
 		T l1=depth[p];
 		T l2=depth[q];
 
@@ -45,15 +18,44 @@ struct lca{
 			p=dp[p][i];
 			d-=(1<<i);
 		}
-
+		
 		if(p==q) return p;
-
-		for(int i=log2(20)+1;i>=0;i--){
+		
+		
+		for(int i=log2(N);i>=0;i--){
 			if(dp[p][i]!=-1 and dp[p][i]!=dp[q][i]){
 				p=dp[p][i];
 				q=dp[q][i];
 			}
 		}
-		return p;
+		return dp[p][0];
+	}
+	
+	lca(T sz,vector<vector<T>> e,T start){// two nodes whose lca u want to know,no of nodes, edge, starting node
+		N=sz;
+		dp=vector<vector<T>>(sz,vector<T>(log2(sz)+1));//N is no of nodes
+		depth=vector<T>(sz);// depth of each node
+		solve(start,e);
+	}
+	
+	void dfs(int node,vector<vector<T>> edge,T par,T dep){ // to fill the first col of DP and depth of each node
+		dp[node][0]=par;
+		depth[node]=dep;
+
+		for(int x:edge[node]){
+			if(x!=par)
+				dfs(x,edge,node,dep+1);
+		}
+	}
+
+	 void solve(T start,vector<vector<T>> edge){
+		dfs(start,edge,-1,0);
+		for(int i=1;i<log2(N);i++){// to fill remainin cells of dp
+			for(int j=0;j<N;j++){
+				if(dp[j][i-1]!=-1){
+					dp[j][i]=dp[dp[j][i-1]][i-1];
+				}else dp[j][i]=-1;
+			}
+		}
 	}
 };
