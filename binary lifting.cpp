@@ -1,7 +1,6 @@
 template<typename T>
 struct lca{
-	T N;
-	T dp[N][(T)log2(N)+1];// N is no of nodes
+	T dp[N][(T)log2(N)+1];//in place of N write no of nodex in tree
 	T depth[N];// depth of each node
 	T ans; // get the answer
 	
