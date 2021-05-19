@@ -31,19 +31,20 @@ struct lca{
 		return dp[p][0];
 	}
 	
-	lca(T sz,vector<vector<T>> e,T start){// two nodes whose lca u want to know,no of nodes, edge, starting node
+	lca(T sz,vector<vector<T>> e,T start){//no of nodes, edge, starting node
 		N=sz;
 		dp=vector<vector<T>>(sz,vector<T>(log2(sz)+1));//N is no of nodes
 		depth=vector<T>(sz);// depth of each node
 		solve(start,e);
 	}
 	
+	set<ll> vis;
 	void dfs(int node,vector<vector<T>> edge,T par,T dep){ // to fill the first col of DP and depth of each node
 		dp[node][0]=par;
 		depth[node]=dep;
-
+		vis.insert(node);
 		for(int x:edge[node]){
-			if(x!=par)
+			if(vis.count(x)==0)
 				dfs(x,edge,node,dep+1);
 		}
 	}
