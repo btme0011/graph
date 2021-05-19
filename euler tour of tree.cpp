@@ -13,7 +13,7 @@ struct ett{
 		
 	}
 
-	void dfs(int node,vector<vector<int>> edge,int par){
+	void dfs(T node,vector<vector<T>> &edge,T par){
 
 		in[node]=timee;
 		euler[timee]=node;
