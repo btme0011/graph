@@ -26,4 +26,4 @@ struct ett{
 		euler[timee]=node;
 		++timee;
 	}
-}
+};
