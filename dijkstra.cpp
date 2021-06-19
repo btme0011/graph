@@ -6,7 +6,7 @@ struct dja{
 	dja(T n,vector<vector<pair<T,T>>> e,T a,T b){// no of nodes,edge(weight and destination),start node,destination node
 		edge=e;
 		vis=vector<bool>(n+1);
-		starti(e,a);
+		starti(a,b);
 		
 	}
 	
