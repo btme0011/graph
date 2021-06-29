@@ -22,7 +22,7 @@ struct bfs{
 			q.pop();
 
 			for(ll x:edge[curr]){
-				if(vis.count(x)==0){
+				if(vis[x]==0){
 					q.push(x);
 					vis[x]=1;
 				}
