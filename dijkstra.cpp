@@ -10,7 +10,7 @@ struct dja{
 		
 	}
 	
-	void start(T a,T b){
+	void starti(T a,T b){
 		set<pair<T,T>> se;
 		se.insert({0,a});
 		vis[a]=1;
