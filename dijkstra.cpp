@@ -15,7 +15,7 @@ struct dja{
 		se.insert({0,a});
 		while(!se.empty()){
 			pair<ll,ll> curr=*se.begin();
-			if(vis[curr.second]!=0) {se.erase(se.begin());continue;}
+			while(vis[curr.second]!=0) {se.erase(se.begin());continue;}
 			vis[curr.second]=1;
 			se.erase(se.begin());		
 
