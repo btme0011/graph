@@ -13,7 +13,6 @@ struct dja{
 	void starti(T a,T b){
 		set<pair<T,T>> se;
 		se.insert({0,a});
-		vis[a]=1;
 		while(!se.empty()){
 			pair<ll,ll> curr=*se.begin();
 			if(vis[curr.second]!=0) {se.erase(se.begin());continue;}
