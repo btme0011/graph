@@ -12,7 +12,7 @@ struct dja{
 	
 	void start(T a,T b){
 		set<pair<T,T>> se;
-		se.push({0,a});
+		se.insert({0,a});
 		vis[a]=1;
 		while(!se.empty()){
 			pair<ll,ll> curr=*se.begin();
@@ -27,7 +27,7 @@ struct dja{
 			
 			for(auto x:edge[curr.second]){// things which are connected by that node
 				if(vis[x.second]==0)	{
-					se.push({x.first+curr.first,x.second});
+					se.insert({x.first+curr.first,x.second});
 				}
 			}
 		}
